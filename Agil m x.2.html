@@ -1,0 +1,1369 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TechLearn — Belajar Teknologi Lebih Mudah | Agil Muhammad (X.2)</title>
+  <meta name="description" content="Platform edukasi teknologi modern mengenai AI, Machine Learning, Deep Learning, Programming, dan Web Development." />
+  
+  <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       1. CSS VARIABLES & THEME SYSTEM (LIGHT & DARK MODE)
+       ========================================================================== */
+    :root {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f8fafc;
+      --bg-card: #ffffff;
+      --bg-glass: rgba(255, 255, 255, 0.85);
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --text-muted: #64748b;
+      --accent: #0f172a;
+      --accent-hover: #334155;
+      --accent-contrast: #ffffff;
+      --border-color: #e2e8f0;
+      --border-strong: #cbd5e1;
+      --tag-bg: #f1f5f9;
+      --tag-text: #0f172a;
+      --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.05);
+      --shadow-md: 0 10px 25px -5px rgba(15, 23, 42, 0.07), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
+      --shadow-lg: 0 20px 35px -10px rgba(15, 23, 42, 0.12);
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    [data-theme="dark"] {
+      --bg-primary: #09090b;
+      --bg-secondary: #121215;
+      --bg-card: #18181b;
+      --bg-glass: rgba(9, 9, 11, 0.85);
+      --text-primary: #f8fafc;
+      --text-secondary: #a1a1aa;
+      --text-muted: #71717a;
+      --accent: #ffffff;
+      --accent-hover: #e4e4e7;
+      --accent-contrast: #09090b;
+      --border-color: #27272a;
+      --border-strong: #3f3f46;
+      --tag-bg: #27272a;
+      --tag-text: #f4f4f5;
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+      --shadow-md: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+      --shadow-lg: 0 20px 35px -10px rgba(0, 0, 0, 0.7);
+    }
+
+    /* ==========================================================================
+       2. RESET & BASE TYPOGRAPHY
+       ========================================================================== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.65;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      overflow-x: hidden;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+
+    /* ==========================================================================
+       3. STICKY GLASSMORPHISM NAVBAR
+       ========================================================================== */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg-glass);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border-color);
+      transition: var(--transition);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.35rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--text-primary);
+    }
+
+    .brand-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 9px;
+      background: var(--accent);
+      color: var(--accent-contrast);
+      display: grid;
+      place-items: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      position: relative;
+      padding: 6px 0;
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--text-primary);
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: width 0.25s ease;
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
+      width: 100%;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .theme-btn, .mobile-menu-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      border: 1px solid var(--border-color);
+      background: var(--bg-card);
+      color: var(--text-primary);
+      display: grid;
+      place-items: center;
+      transition: var(--transition);
+    }
+
+    .theme-btn:hover, .mobile-menu-btn:hover {
+      border-color: var(--text-primary);
+      transform: translateY(-1px);
+    }
+
+    .mobile-menu-btn {
+      display: none;
+    }
+
+    /* ==========================================================================
+       4. HERO SECTION (MONOCHROME ARCHITECTURAL BANNER + HERO TEXT)
+       ========================================================================== */
+    .hero {
+      padding: 36px 0 64px;
+    }
+
+    .hero-banner-wrapper {
+      position: relative;
+      width: 100%;
+      height: 300px;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      margin-bottom: 44px;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-md);
+      background: #18181b;
+    }
+
+    .hero-banner-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(100%) contrast(115%);
+      transition: transform 0.8s ease;
+    }
+
+    .hero-banner-wrapper:hover .hero-banner-img {
+      transform: scale(1.03);
+    }
+
+    .hero-banner-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(9, 9, 11, 0.72) 0%, rgba(9, 9, 11, 0.15) 60%, transparent 100%);
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      padding: 24px 28px;
+      color: #ffffff;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .hero-content {
+      max-width: 720px;
+    }
+
+    .hero-title {
+      font-size: clamp(2.25rem, 4.5vw, 3.35rem);
+      font-weight: 800;
+      letter-spacing: -0.035em;
+      line-height: 1.12;
+      margin-bottom: 18px;
+    }
+
+    .hero-subtitle {
+      font-size: 1.125rem;
+      color: var(--text-secondary);
+      margin-bottom: 30px;
+      max-width: 600px;
+    }
+
+    .hero-cta-group {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--accent);
+      color: var(--accent-contrast);
+      font-weight: 600;
+      font-size: 0.98rem;
+      padding: 14px 28px;
+      border-radius: 12px;
+      transition: var(--transition);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bg-card);
+      color: var(--text-primary);
+      border: 1px solid var(--border-strong);
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 13px 24px;
+      border-radius: 12px;
+      transition: var(--transition);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--text-primary);
+      background: var(--bg-secondary);
+    }
+
+    /* ==========================================================================
+       5. SECTION HEADERS
+       ========================================================================== */
+    .section {
+      padding: 56px 0;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .section-title {
+      font-size: 1.65rem;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+    }
+
+    .section-desc {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      margin-top: 4px;
+    }
+
+    /* ==========================================================================
+       6. ARTIKEL PILIHAN (FEATURED EDITORIAL CARD)
+       ========================================================================== */
+    .featured-card {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      transition: var(--transition);
+    }
+
+    .featured-card:hover {
+      border-color: var(--border-strong);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .featured-body {
+      padding: 44px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .tag-pill {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: var(--tag-bg);
+      color: var(--tag-text);
+      padding: 6px 12px;
+      border-radius: 6px;
+      margin-bottom: 18px;
+      border: 1px solid var(--border-color);
+    }
+
+    .featured-title {
+      font-size: clamp(1.5rem, 2.5vw, 2rem);
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      line-height: 1.25;
+      margin-bottom: 14px;
+    }
+
+    .featured-excerpt {
+      color: var(--text-secondary);
+      font-size: 1.02rem;
+      margin-bottom: 28px;
+      max-width: 500px;
+    }
+
+    .featured-media {
+      position: relative;
+      min-height: 320px;
+      background: #18181b;
+      overflow: hidden;
+    }
+
+    .featured-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(100%) contrast(112%);
+      transition: transform 0.6s ease;
+    }
+
+    .featured-card:hover .featured-media img {
+      transform: scale(1.04);
+    }
+
+    /* ==========================================================================
+       7. SEARCH BAR & INTERACTIVE CATEGORY PILLS
+       ========================================================================== */
+    .filter-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 28px;
+      padding: 18px 22px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+    }
+
+    .category-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .cat-pill {
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-size: 0.86rem;
+      font-weight: 600;
+      background: var(--bg-card);
+      color: var(--text-secondary);
+      border: 1px solid var(--border-color);
+      transition: var(--transition);
+    }
+
+    .cat-pill:hover {
+      border-color: var(--text-primary);
+      color: var(--text-primary);
+    }
+
+    .cat-pill.active {
+      background: var(--accent);
+      color: var(--accent-contrast);
+      border-color: var(--accent);
+    }
+
+    .search-box {
+      position: relative;
+      min-width: 250px;
+      flex: 1;
+      max-width: 320px;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 10px 16px 10px 38px;
+      border-radius: 10px;
+      border: 1px solid var(--border-color);
+      background: var(--bg-card);
+      color: var(--text-primary);
+      font-family: inherit;
+      font-size: 0.9rem;
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .search-box input:focus {
+      border-color: var(--text-primary);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+
+    /* ==========================================================================
+       8. ARTIKEL TERBARU (3-COLUMN RESPONSIVE GRID)
+       ========================================================================== */
+    .articles-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .article-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: var(--transition);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .article-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--text-primary);
+      box-shadow: var(--shadow-md);
+    }
+
+    .article-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .article-meta .tag-pill {
+      margin-bottom: 0;
+    }
+
+    .read-time {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .article-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.35;
+      margin-bottom: 12px;
+    }
+
+    .article-desc {
+      color: var(--text-secondary);
+      font-size: 0.94rem;
+      margin-bottom: 24px;
+    }
+
+    .read-more-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      padding-top: 14px;
+      border-top: 1px solid var(--border-color);
+      width: 100%;
+      justify-content: space-between;
+      transition: var(--transition);
+    }
+
+    .read-more-btn span.arrow {
+      transition: transform 0.25s ease;
+    }
+
+    .article-card:hover .read-more-btn span.arrow {
+      transform: translateX(5px);
+    }
+
+    /* ==========================================================================
+       9. KATEGORI DIRECTORY & ABOUT SECTION
+       ========================================================================== */
+    .category-showcase {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 14px;
+    }
+
+    .category-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 20px 16px;
+      text-align: center;
+      transition: var(--transition);
+      cursor: pointer;
+    }
+
+    .category-box:hover {
+      border-color: var(--text-primary);
+      background: var(--bg-secondary);
+      transform: translateY(-3px);
+    }
+
+    .category-box strong {
+      display: block;
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .category-box span {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .about-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .creator-badge-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .creator-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .creator-name {
+      font-size: 1.35rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 4px;
+    }
+
+    .creator-class {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--accent-contrast);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 6px;
+      margin-top: 6px;
+    }
+
+    /* ==========================================================================
+       10. FOOTER
+       ========================================================================== */
+    .footer {
+      border-top: 1px solid var(--border-color);
+      background: var(--bg-secondary);
+      padding: 48px 0 36px;
+      margin-top: 40px;
+    }
+
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 24px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .footer-tagline {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      margin-top: 8px;
+    }
+
+    .footer-bottom {
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+
+    .footer-credit {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      padding: 8px 16px;
+      border-radius: 999px;
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    /* ==========================================================================
+       11. INTERACTIVE ARTICLE READER MODAL
+       ========================================================================== */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(9, 9, 11, 0.72);
+      backdrop-filter: blur(6px);
+      z-index: 999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+      opacity: 1;
+    }
+
+    .modal-dialog {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      max-width: 720px;
+      width: 100%;
+      max-height: 86vh;
+      overflow-y: auto;
+      padding: 36px;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      transform: translateY(16px);
+      transition: transform 0.28s ease;
+    }
+
+    .modal-backdrop.open .modal-dialog {
+      transform: translateY(0);
+    }
+
+    .modal-close {
+      position: sticky;
+      top: 0;
+      float: right;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      font-size: 1.2rem;
+      display: grid;
+      place-items: center;
+    }
+
+    .modal-close:hover {
+      background: var(--accent);
+      color: var(--accent-contrast);
+    }
+
+    .modal-body h2 {
+      font-size: 1.75rem;
+      font-weight: 800;
+      margin: 12px 0 16px;
+      line-height: 1.25;
+    }
+
+    .modal-body p {
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+      font-size: 1rem;
+    }
+
+    .modal-body pre {
+      background: #0f172a;
+      color: #f8fafc;
+      padding: 18px;
+      border-radius: 12px;
+      overflow-x: auto;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      margin: 18px 0;
+      border: 1px solid #334155;
+    }
+
+    /* ==========================================================================
+       12. RESPONSIVE BREAKPOINTS
+       ========================================================================== */
+    @media (max-width: 960px) {
+      .featured-card {
+        grid-template-columns: 1fr;
+      }
+      .featured-media {
+        order: -1;
+        min-height: 240px;
+      }
+      .articles-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .category-showcase {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .about-card {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 72px;
+        left: 0;
+        right: 0;
+        background: var(--bg-card);
+        flex-direction: column;
+        padding: 20px 24px;
+        gap: 16px;
+        border-bottom: 1px solid var(--border-color);
+      }
+      .nav-links.show {
+        display: flex;
+      }
+      .mobile-menu-btn {
+        display: grid;
+      }
+      .articles-grid {
+        grid-template-columns: 1fr;
+      }
+      .category-showcase {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .featured-body {
+        padding: 28px;
+      }
+      .hero-banner-wrapper {
+        height: 220px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========================================================================
+       HEADER / NAVIGATION BAR
+       ======================================================================== -->
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="#home" class="brand">
+        <span class="brand-icon">&lt;/&gt;</span>
+        <span>TechLearn</span>
+      </a>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home" class="nav-item active">Home</a></li>
+        <li><a href="#artikel" class="nav-item">Artikel</a></li>
+        <li><a href="#kategori" class="nav-item">Kategori</a></li>
+        <li><a href="#about" class="nav-item">About</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button class="theme-btn" id="themeToggle" aria-label="Ganti Tema Terang/Gelap" title="Ganti Tema">
+          <svg id="themeIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Buka Menu">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ======================================================================
+         HERO SECTION (SESUAI HALAMAN 1 PDF)
+         ====================================================================== -->
+    <section id="home" class="hero">
+      <div class="container">
+        <!-- Monochrome Geometric Architectural Banner -->
+        <div class="hero-banner-wrapper">
+          <img 
+            src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1400&q=80" 
+            alt="Struktur Geometris Arsitektur Monokrom" 
+            class="hero-banner-img"
+            onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%221200%22 height=%22300%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%2318181b%22/><path d=%22M0 0L1200 300M1200 0L0 300M600 0V300M0 150H1200%22 stroke=%22%233f3f46%22 stroke-width=%222%22/></svg>'"
+          />
+          <div class="hero-banner-overlay">
+            <span class="hero-badge">Platform Edukasi Teknologi • 2026</span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; opacity: 0.85;">Agil Muhammad • X.2</span>
+          </div>
+        </div>
+
+        <div class="hero-content">
+          <h1 class="hero-title">Belajar Teknologi Lebih Mudah</h1>
+          <p class="hero-subtitle">
+            Temukan artikel dan tutorial tentang AI, programming, web development, dan teknologi.
+          </p>
+          <div class="hero-cta-group">
+            <a href="#artikel" class="btn-primary">
+              <span>Mulai Membaca</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+            <a href="#kategori" class="btn-outline">Jelajahi Kategori</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         ARTIKEL PILIHAN (FEATURED ARTICLE — HALAMAN 1 & 2 PDF)
+         ====================================================================== -->
+    <section id="artikel" class="section">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title">Artikel Pilihan</h2>
+            <p class="section-desc">Rekomendasi bacaan utama untuk memahami fondasi kecerdasan buatan modern.</p>
+          </div>
+        </div>
+
+        <article class="featured-card">
+          <div class="featured-body">
+            <span class="tag-pill">ARTIFICIAL INTELLIGENCE</span>
+            <h3 class="featured-title">Memahami Machine Learning untuk Pemula</h3>
+            <p class="featured-excerpt">
+              Pelajari konsep dasar machine learning dan bagaimana komputer dapat belajar dari data.
+            </p>
+            <button class="btn-primary" onclick="openArticle('ml-pemula')">
+              <span>Baca Artikel</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </button>
+          </div>
+
+          <div class="featured-media">
+            <img 
+              src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=900&q=80" 
+              alt="Pemandangan Gedung Perkotaan Monokrom"
+              onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22600%22 height=%22400%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%2327272a%22/><rect x=%22120%22 y=%2280%22 width=%2280%22 height=%22320%22 fill=%22%233f3f46%22/><rect x=%22240%22 y=%2240%22 width=%22110%22 height=%22360%22 fill=%22%2352525b%22/><rect x=%22390%22 y=%22120%22 width=%2290%22 height=%22280%22 fill=%22%233f3f46%22/></svg>'"
+            />
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         ARTIKEL TERBARU (3-COLUMN GRID + FILTER — HALAMAN 2 PDF)
+         ====================================================================== -->
+    <section class="section" style="padding-top: 16px;">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title">Artikel Terbaru</h2>
+            <p class="section-desc">Kumpulan panduan praktis yang disusun terstruktur untuk pemula hingga mahir.</p>
+          </div>
+        </div>
+
+        <!-- Interactive Filter & Search Toolbar -->
+        <div class="filter-toolbar">
+          <div class="category-pills" id="filterPills">
+            <button class="cat-pill active" data-filter="ALL">Semua</button>
+            <button class="cat-pill" data-filter="AI">AI</button>
+            <button class="cat-pill" data-filter="Machine Learning">Machine Learning</button>
+            <button class="cat-pill" data-filter="Deep Learning">Deep Learning</button>
+            <button class="cat-pill" data-filter="Programming">Programming</button>
+            <button class="cat-pill" data-filter="Web Development">Web Development</button>
+          </div>
+
+          <div class="search-box">
+            <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input type="text" id="searchInput" placeholder="Cari judul artikel..." aria-label="Cari artikel" />
+          </div>
+        </div>
+
+        <!-- Cards Container -->
+        <div class="articles-grid" id="articlesGrid">
+          <!-- Card 1: Python -->
+          <article class="article-card" data-category="Programming" data-title="Belajar Python dari Dasar">
+            <div>
+              <div class="article-meta">
+                <span class="tag-pill">PROGRAMMING</span>
+                <span class="read-time">5 mnt baca</span>
+              </div>
+              <h3 class="article-title">Belajar Python dari Dasar</h3>
+              <p class="article-desc">
+                Panduan sederhana untuk memahami dasar-dasar Python.
+              </p>
+            </div>
+            <button class="read-more-btn" onclick="openArticle('python-dasar')">
+              <span>Baca Selengkapnya</span>
+              <span class="arrow">→</span>
+            </button>
+          </article>
+
+          <!-- Card 2: HTML & CSS -->
+          <article class="article-card" data-category="Web Development" data-title="Mengenal HTML dan CSS">
+            <div>
+              <div class="article-meta">
+                <span class="tag-pill">WEB DEVELOPMENT</span>
+                <span class="read-time">6 mnt baca</span>
+              </div>
+              <h3 class="article-title">Mengenal HTML dan CSS</h3>
+              <p class="article-desc">
+                Memahami bagaimana HTML dan CSS digunakan untuk membuat website.
+              </p>
+            </div>
+            <button class="read-more-btn" onclick="openArticle('html-css')">
+              <span>Baca Selengkapnya</span>
+              <span class="arrow">→</span>
+            </button>
+          </article>
+
+          <!-- Card 3: Neural Network -->
+          <article class="article-card" data-category="Deep Learning AI" data-title="Apa Itu Neural Network?">
+            <div>
+              <div class="article-meta">
+                <span class="tag-pill">DEEP LEARNING</span>
+                <span class="read-time">7 mnt baca</span>
+              </div>
+              <h3 class="article-title">Apa Itu Neural Network?</h3>
+              <p class="article-desc">
+                Mengenal konsep neural network dengan penjelasan yang sederhana.
+              </p>
+            </div>
+            <button class="read-more-btn" onclick="openArticle('neural-network')">
+              <span>Baca Selengkapnya</span>
+              <span class="arrow">→</span>
+            </button>
+          </article>
+        </div>
+
+        <p id="emptyState" style="display: none; text-align: center; padding: 36px; color: var(--text-muted);">
+          Tidak ada artikel yang cocok dengan pencarian atau kategori tersebut.
+        </p>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         KATEGORI SECTION (HALAMAN 2 PDF)
+         ====================================================================== -->
+    <section id="kategori" class="section">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title">Kategori</h2>
+            <p class="section-desc">Pilih topik pembelajaran teknologi sesuai minatmu.</p>
+          </div>
+        </div>
+
+        <div class="category-showcase">
+          <div class="category-box" onclick="selectCategoryFromCard('AI')">
+            <strong>AI</strong>
+            <span>Kecerdasan Buatan</span>
+          </div>
+          <div class="category-box" onclick="selectCategoryFromCard('Machine Learning')">
+            <strong>Machine Learning</strong>
+            <span>Algoritma & Data</span>
+          </div>
+          <div class="category-box" onclick="selectCategoryFromCard('Deep Learning')">
+            <strong>Deep Learning</strong>
+            <span>Jaringan Saraf Tiruan</span>
+          </div>
+          <div class="category-box" onclick="selectCategoryFromCard('Programming')">
+            <strong>Programming</strong>
+            <span>Logika & Pemrograman</span>
+          </div>
+          <div class="category-box" onclick="selectCategoryFromCard('Web Development')">
+            <strong>Web Development</strong>
+            <span>HTML, CSS & JS</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         ABOUT & IDENTITAS PENGEMBANG (AGIL MUHAMMAD — KELAS X.2)
+         ====================================================================== -->
+    <section id="about" class="section">
+      <div class="container">
+        <div class="about-card">
+          <div>
+            <span class="tag-pill">TENTANG TECHLEARN</span>
+            <h2 class="section-title" style="margin-bottom: 12px;">Belajar teknologi dengan cara yang sederhana.</h2>
+            <p style="color: var(--text-secondary); font-size: 0.98rem;">
+              TechLearn hadir sebagai ruang belajar digital yang menyajikan materi seputar Artificial Intelligence, pemrograman, dan pengembangan web dengan bahasa yang ringkas, terstruktur, dan mudah dipahami oleh pelajar maupun pemula.
+            </p>
+          </div>
+
+          <div class="creator-badge-card">
+            <span class="creator-label">Dikembangkan Oleh</span>
+            <div class="creator-name">Agil Muhammad</div>
+            <div style="color: var(--text-secondary); font-size: 0.9rem;">Proyek Ujian Ekstrakurikuler IT</div>
+            <span class="creator-class">Kelas X.2</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========================================================================
+       FOOTER (SESUAI HALAMAN 2 PDF + IDENTITAS AGIL MUHAMMAD KELAS X.2)
+       ======================================================================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div>
+          <a href="#home" class="brand">
+            <span class="brand-icon">&lt;/&gt;</span>
+            <span>TechLearn</span>
+          </a>
+          <p class="footer-tagline">Belajar teknologi dengan cara yang sederhana.</p>
+        </div>
+
+        <div style="display: flex; gap: 24px; font-size: 0.9rem; font-weight: 600; color: var(--text-secondary);">
+          <a href="#home">Home</a>
+          <a href="#artikel">Artikel</a>
+          <a href="#kategori">Kategori</a>
+          <a href="#about">About</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 TechLearn. All rights reserved.</div>
+        <div class="footer-credit">
+          <span>Created by <strong>Agil Muhammad</strong> — <strong>Kelas X.2</strong></span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================================================================
+       MODAL PEMBACA ARTIKEL INTERAKTIF
+       ======================================================================== -->
+  <div class="modal-backdrop" id="articleModal" role="dialog" aria-modal="true">
+    <div class="modal-dialog">
+      <button class="modal-close" id="closeModalBtn" aria-label="Tutup Artikel">&times;</button>
+      <div class="modal-body" id="modalBody">
+        <!-- Konten artikel diisi secara dinamis oleh JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       JAVASCRIPT LOGIC (INTERAKTIVITAS, FILTER, SEARCH, MODAL & DARK MODE)
+       ======================================================================== -->
+  <script>
+    // 1. Database Konten Artikel Lengkap (Agar tombol "Baca Artikel" benar-benar berfungsi)
+    const articlesData = {
+      'ml-pemula': {
+        category: 'ARTIFICIAL INTELLIGENCE',
+        readTime: '8 Menit Baca',
+        title: 'Memahami Machine Learning untuk Pemula',
+        content: `
+          <p><strong>Machine Learning (ML)</strong> adalah cabang dari Artificial Intelligence (AI) yang memungkinkan sistem komputer belajar dan meningkatkan kemampuannya secara otomatis dari pengalaman (data) tanpa harus diprogram secara eksplisit untuk setiap aturan.</p>
+          <p>Secara garis besar, terdapat tiga pendekatan utama dalam Machine Learning:</p>
+          <p><strong>1. Supervised Learning:</strong> Model dilatih menggunakan data berlabel (contoh: memprediksi harga rumah berdasarkan luas tanah dan lokasi).</p>
+          <p><strong>2. Unsupervised Learning:</strong> Model mencari pola tersembunyi dari data tanpa label (contoh: mengelompokkan segmen pelanggan).</p>
+          <p><strong>3. Reinforcement Learning:</strong> Agen belajar mengambil keputusan terbaik melalui sistem <em>reward</em> dan <em>punishment</em>.</p>
+          <pre>// Contoh alur logika sederhana Machine Learning:
+Data Historis -> Proses Training Model -> Evaluasi Akurasi -> Prediksi Data Baru</pre>
+        `
+      },
+      'python-dasar': {
+        category: 'PROGRAMMING',
+        readTime: '5 Menit Baca',
+        title: 'Belajar Python dari Dasar',
+        content: `
+          <p><strong>Python</strong> adalah bahasa pemrograman tingkat tinggi yang terkenal karena sintaksnya yang bersih, mudah dibaca menyerupai bahasa Inggris, dan sangat serbaguna—mulai dari pengembangan web hingga kecerdasan buatan.</p>
+          <p>Berikut adalah contoh struktur dasar variabel, perulangan, dan fungsi di Python:</p>
+          <pre># Menyapa pengguna di Python
+nama = "Agil Muhammad"
+kelas = "X.2"
+
+def sapa_siswa(nama, kelas):
+    return f"Halo {nama} dari kelas {kelas}, selamat belajar Python!"
+
+print(sapa_siswa(nama, kelas))</pre>
+          <p>Dengan menguasai tipe data dasar (<code>str</code>, <code>int</code>, <code>list</code>, <code>dict</code>) serta struktur kontrol (<code>if-else</code> dan <code>for</code>), kamu sudah memiliki fondasi kuat untuk melangkah ke bidang Data Science maupun Backend Development.</p>
+        `
+      },
+      'html-css': {
+        category: 'WEB DEVELOPMENT',
+        readTime: '6 Menit Baca',
+        title: 'Mengenal HTML dan CSS',
+        content: `
+          <p>Setiap halaman website modern dibangun di atas dua pilar utama: <strong>HTML (HyperText Markup Language)</strong> sebagai kerangka struktur konten, dan <strong>CSS (Cascading Style Sheets)</strong> sebagai pengatur tata letak, warna, serta estetika visual.</p>
+          <pre>&lt;!-- Contoh Struktur HTML + CSS --&gt;
+&lt;div class="kartu-belajar"&gt;
+  &lt;h2&gt;TechLearn&lt;/h2&gt;
+  &lt;p&gt;Belajar teknologi dengan cara yang sederhana.&lt;/p&gt;
+&lt;/div&gt;</pre>
+          <p>Dengan menggabungkan HTML semantik, CSS Grid/Flexbox untuk tampilan responsif di HP maupun laptop, serta JavaScript untuk interaktivitas, sebuah halaman statis dapat berubah menjadi aplikasi web yang hidup.</p>
+        `
+      },
+      'neural-network': {
+        category: 'DEEP LEARNING',
+        readTime: '7 Menit Baca',
+        title: 'Apa Itu Neural Network?',
+        content: `
+          <p><strong>Artificial Neural Network (Jaringan Saraf Tiruan)</strong> adalah arsitektur algoritma yang terinspirasi dari cara kerja jaringan neuron di dalam otak manusia dalam mengenali pola kompleks.</p>
+          <p>Sebuah Neural Network tersusun dari tiga lapisan utama:</p>
+          <p><strong>• Input Layer:</strong> Menerima data mentah (misalnya piksel gambar atau teks).</p>
+          <p><strong>• Hidden Layers:</strong> Lapisan tersembunyi tempat terjadinya perhitungan bobot (<em>weights</em>) dan fungsi aktivasi untuk mengekstrak fitur penting.</p>
+          <p><strong>• Output Layer:</strong> Menghasilkan keputusan akhir atau klasifikasi.</p>
+          <pre>Input (x) ──▶ [ Hidden Layer (Weights + Bias) ] ──▶ Output Prediksi (y)</pre>
+        `
+      }
+    };
+
+    // 2. Modal Reader Logic
+    const modal = document.getElementById('articleModal');
+    const modalBody = document.getElementById('modalBody');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+
+    function openArticle(articleId) {
+      const data = articlesData[articleId];
+      if (!data) return;
+
+      modalBody.innerHTML = `
+        <span class="tag-pill">${data.category}</span>
+        <span class="read-time" style="margin-left: 10px;">• ${data.readTime}</span>
+        <h2>${data.title}</h2>
+        ${data.content}
+      `;
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      modal.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    closeModalBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+    });
+
+    // 3. Filter Kategori & Live Search Logic
+    const filterPills = document.querySelectorAll('.cat-pill');
+    const articleCards = document.querySelectorAll('.article-card');
+    const searchInput = document.getElementById('searchInput');
+    const emptyState = document.getElementById('emptyState');
+
+    let currentCategory = 'ALL';
+
+    function filterArticles() {
+      const keyword = searchInput.value.toLowerCase().trim();
+      let visibleCount = 0;
+
+      articleCards.forEach((card) => {
+        const categories = card.getAttribute('data-category');
+        const title = card.getAttribute('data-title').toLowerCase();
+        const desc = card.querySelector('.article-desc').textContent.toLowerCase();
+
+        const matchCategory = currentCategory === 'ALL' || categories.includes(currentCategory);
+        const matchSearch = title.includes(keyword) || desc.includes(keyword);
+
+        if (matchCategory && matchSearch) {
+          card.style.display = 'flex';
+          visibleCount++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      emptyState.style.display = visibleCount === 0 ? 'block' : 'none';
+    }
+
+    filterPills.forEach((pill) => {
+      pill.addEventListener('click', () => {
+        filterPills.forEach((p) => p.classList.remove('active'));
+        pill.classList.add('active');
+        currentCategory = pill.getAttribute('data-filter');
+        filterArticles();
+      });
+    });
+
+    searchInput.addEventListener('input', filterArticles);
+
+    // Klik kotak di section Kategori langsung memfilter artikel dan scroll ke atas
+    function selectCategoryFromCard(categoryName) {
+      filterPills.forEach((pill) => {
+        pill.classList.toggle('active', pill.getAttribute('data-filter') === categoryName);
+      });
+      currentCategory = categoryName;
+      filterArticles();
+      document.getElementById('filterPills').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    // 4. Dark / Light Mode Toggle
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+
+    themeToggle.addEventListener('click', () => {
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      if (isDark) {
+        document.documentElement.removeAttribute('data-theme');
+        themeIcon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>';
+      } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        themeIcon.innerHTML = '<circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>';
+      }
+    });
+
+    // 5. Mobile Navigation Toggle & Scroll Spy
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const navLinks = document.getElementById('navLinks');
+    const navItems = document.querySelectorAll('.nav-item');
+
+    mobileMenuBtn.addEventListener('click', () => {
+      navLinks.classList.toggle('show');
+    });
+
+    navItems.forEach((item) => {
+      item.addEventListener('click', () => {
+        navLinks.classList.remove('show');
+        navItems.forEach((nav) => nav.classList.remove('active'));
+        item.classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
